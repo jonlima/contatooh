@@ -1,4 +1,14 @@
+var config = require('./config')();
+
 exports.config = {
+	sauceUser : config.sauceUser, 
+  	sauceKey : config.sauceKey, 
+	capabilities : {
+	    'name': config.sauceTestName,
+	    'browserName': 'chrome',
+	    'tunnel-identifier': config.travisJobNumber,
+	    'build': config.travisBuild
+	 },
 	specs: ['../test/e2e/**/*Spec.js'],
 	onPrepare: function(){
 		browser.driver.get('http://localhost:3000');
@@ -6,8 +16,8 @@ exports.config = {
 			return browser.driver.isElementPresent(by.id('entrar'));
 		});
 		browser.driver.findElement(by.id('entrar')).click();
-		browser.driver.findElement(by.id('login_field')).sendKeys('jonatha.lima14@gmail.com');
-		browser.driver.findElement(by.id('password')).sendKeys('jon12345');
+		browser.driver.findElement(by.id('login_field')).sendKeys(config.seleniumUser);
+		browser.driver.findElement(by.id('password')).sendKeys(config.seleniumUserPassword);
 		browser.driver.findElement(by.name('commit')).click();
 	}
 };
