@@ -2,8 +2,9 @@
   "name": "contatooh",
   "version": "0.0.0",
   "description": "Projeto do livro mean",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jonatha Lima",
@@ -36,6 +37,7 @@
     "jasmine-core": "^2.3.4",
     "karma": "^0.12.37",
     "karma-jasmine": "^0.3.6",
+    "karma-ng-html2js-preprocessor": "^0.1.2",
     "karma-phantomjs-launcher": "^0.1.4"
   }
 }

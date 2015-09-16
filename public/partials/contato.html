@@ -1,3 +1,9 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Cadastro de Contato</h3>
+    </div>
+    <div class="panel-body">
+
 <h1 class="text-center">Contato</h1>
 <p ng-show="mensagem.texto">{{mensagem.texto}}</p>
 <form ng-submit="salva()">
@@ -25,6 +31,9 @@
     </div>
     <div>
         <button type="submit" class="btn btn-primary" >Salvar</button>
-        <a href="#/" class="btn btn-default">Voltar</a>
+        <a id="botao-voltar" meu-focus evento="contatoSalvo" href="#/" class="btn btn-default">Voltar</a>
     </div>
 </form>
+
+</div>
+</div>

@@ -2,26 +2,40 @@ language: node_js
 notifications:
   email: jonatha.lima14@gmail.com
 node_js:
-  - 0.10
+- 0.1
 services:
-  - mongodb
+- mongodb
 env:
   global:
-    - NODE_ENV: test
+  - NODE_ENV: test
 addons:
   sauce_connect: true
 before_install:
-  - npm install -g bower@1.3
-  - npm install -g grunt-cli@0.1
-  - npm install -g karma-cli@0.0
-  - npm install -g protractor@1.5
-  - webdriver-manager update
-  - bower install
+- npm install -g bower@1.3
+- npm install -g grunt-cli@0.1
+- npm install -g karma-cli@0.0
+- npm install -g protractor@1.5
+- webdriver-manager update
+- bower install
 before_script:
-  - node test/data.js 
-  - grunt
-  - cd dist
+- node test/data.js
+- grunt minifica
 script:
- - karma start config/karma.config.js --single-run --browsers PhantomJS
- - node server &
- - protractor config/protractor.js
+- karma start config/karma.config.js --single-run --browsers PhantomJS
+- node server &
+- protractor config/protractor.js
+before_deploy:
+- git config --global user.email 'travis@travis-ci.com'
+- git config --global user.name 'Travis CI'
+- git checkout $TRAVIS_BRANCH
+- git add --all
+- git commit -am "Travis commit"
+deploy:
+  provider: openshift
+  user: jonatha.lima14@gmail.com
+  password:
+    secure: rL3NGn1RgxVRV9HV3RtLkWdylAsN9EoiG9G67UYSoZgUftDX17K8/mTb33rrZaYaUjosKnak4+XQCRlIfAggpVFuRVJEqFDvubHyQp3C+l7jl/nDdwHDGTIXECmx1sSfEJQOkjTVKWHXwhovSf24fef5VuTf9qnJht5KFV4I2tBLHTYw1ag8GM1Cslao92awexVbOhYF/LmoxC7ENYhZpSCX4wvEzVsWFcL8pcxCVvpJgx6t6p5STsbHiXITFufkQyCONnB1g66QMqUA0wKGoMgvzvZlRsxbMmyX21lDz13CIAaS1WjAOVpdLJMOls3Oy8mE345FF6A9JO1yIilZ3GH8wXTe7FHD77GPg3PbSdyEd/TUDWl93SaGrioeAzltPN+jUNg+B/FJdEq5JOp1x/5nt21sNra5tmKJQ/BjeVzVv2ywVNDDUmB/rD/h3DBDqUgdw3d4oDPuA9KtrCr+130CnXk+oNLkR2f3i23W0mXFmymGCXb9yl5o3iPJXWE3ZC1akhp6dD9zr1IvSPMDdVXPh3mm05JSiPA3hEptcuIyg8Vs4ADMLZhpV6LteRgKv+JpMU0k5o4XawMEiufM+Paw8eHFd5P3+nXiAnMd9fXTnGRvQgqqOBLaT1J55KAjED84AC+qs/Z8TNLPaOz10mugsg+rv7EiBwZsqd+kH3I=
+  app: contatooh
+  domain: http://contatooh-contatooh1.rhcloud.com/
+  on:
+    repo: jonlima/contatooh
